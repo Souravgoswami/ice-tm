@@ -12,14 +12,18 @@ VALUE setBaudRate(volatile VALUE obj, volatile VALUE dev, volatile VALUE speed) 
 
 	char status = tcgetattr(serial_port, &tty) ;
 
-	// IDE sets these flags
-	// speed 57600 baud; line = 0;
-	// min = 0; time = 0;
-	// -brkint -icrnl -imaxbel
-	// -opost
-	// -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke
+	/*
+		Serial Monitor sets these flags:
+
+		speed 57600 baud; line = 0;
+		min = 0; time = 0;
+		-brkint -icrnl -imaxbel
+		-opost
+		-isig -icanon -iexten -echo -echoe -echok -echoctl -echoke
+	*/
 
 	if(status != 0) return Qnil ;
+
 	tty.c_cflag &= ~CSIZE ;
 	tty.c_cflag |= CS8 ;
 	tty.c_cflag |= CREAD | CLOCAL ;
@@ -43,7 +47,8 @@ VALUE setBaudRate(volatile VALUE obj, volatile VALUE dev, volatile VALUE speed) 
 	status = tcsetattr(serial_port, TCSANOW, &tty) ;
 
 	if (status == 0) return Qtrue ;
-	else return Qfalse ;
+
+	return Qfalse ;
 }
 
 VALUE getBaudRate(volatile VALUE obj, volatile VALUE dev) {
