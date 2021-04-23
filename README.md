@@ -1,41 +1,32 @@
-# Ice::Tm
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ice/tm`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+# Ice-TM
+Ice task manager allows you to monitor your system resources using Arduino connected to 128x64 OLED display.
 
 ## Installation
+Ice-taskmanager should be installed on your Arduino.
+Your arduino has to be attached with a rit-253 or similar 128x64 OLED display that can utilize the graphics library from Adafruit.
 
-Add this line to your application's Gemfile:
+1. Install the ice-taskmanager on your arduino.
+2.  Install this gem on your computer, laptop, raspberry pi, etc. as:
 
-```ruby
-gem 'ice-tm'
+```
+$ gem install ice-tm
 ```
 
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install ice-tm
-
 ## Usage
+Make sure your arduino is connected to your computer.
+Although ice-taskmanager is hot pluggable, and ice-tm works fine with that.
 
-TODO: Write usage instructions here
+Launch ice-taskmanager with `ice-tm` command on your PC.
 
 ## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ice-tm. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/ice-tm/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/Souravgoswami/ice-tm.
 
 ## License
-
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
