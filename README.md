@@ -1,6 +1,8 @@
 # Ice-TM
 Ice task manager allows you to monitor your system resources using Arduino connected to 128x64 OLED display.
 
+![Preview](https://github.com/Souravgoswami/ice-tm/blob/master/previews/preview.gif)
+
 ## Installation
 Ice-taskmanager should be installed on your Arduino.
 Your arduino has to be attached with a rit-253 or similar 128x64 OLED display that can utilize the graphics library from Adafruit.
