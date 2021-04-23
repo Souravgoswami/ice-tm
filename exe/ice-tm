@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+require 'ice_tm'
+
+# Find Device running Ice Taskmanager
+dev = nil
+retry_count = 0
+
+while(!dev)
+	dev = IceTM.find_device
+
+	if dev
+		puts "#{IceTM::BOLD}#{IceTM::GREEN}:: Device discovered successfully. Path: #{dev}#{IceTM::RESET}"
+	else
+		puts "#{IceTM::BOLD}#{IceTM::RED}:: No device found. Retrying #{retry_count += 1}#{IceTM::RESET}"
+		sleep 0.5
+	end
+end
+
+IceTM.start(dev)
