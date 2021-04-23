@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 	s.files = Dir.glob(%w(exe/** ext/**/*.{c,h} lib/**/*.rb))
 	s.executables = s.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
 	s.require_paths = ["lib"]
-  s.extensions = Dir.glob("ext/**/extconf.rb")
+	s.extensions = Dir.glob("ext/**/extconf.rb")
 	s.bindir = "exe"
+	s.add_runtime_dependency 'linux_stat', '>= 2.2.2'
 end
