@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ice_tm (0.1.0)
+    ice_tm (0.1.1)
       linux_stat (>= 2.2.2)
 
 GEM
