@@ -7,7 +7,7 @@ Ice task manager allows you to monitor your system resources using Arduino conne
 Ice-taskmanager should be installed on your Arduino.
 Your arduino has to be attached with a rit-253 or similar 128x64 OLED display that can utilize the graphics library from Adafruit.
 
-1. Install the ice-taskmanager on your arduino.
+1. Install the [ice-taskmanager](https://github.com/Souravgoswami/ice-taskmanager) on your arduino.
 2.  Install this gem on your computer, laptop, raspberry pi, etc. as:
 
 ```
