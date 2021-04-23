@@ -23,7 +23,13 @@ module IceTM
 				Dir.glob('/dev/ttyUSB[0-9]*').each { |x|
 					if File.writable?(x)
 						puts "#{IceTM::BOLD}#{IceTM::BLUE}:: #{Time.now.strftime('%H:%M:%S.%2N')}: Changing `baudrate` to 57600...#{IceTM::RESET}"
-						IceTM.set_baudrate(x, IceTM::BAUDRATE)
+
+						if IceTM.set_baudrate(x, IceTM::BAUDRATE)
+							puts "#{IceTM::BOLD}#{IceTM::BLUE}:: #{Time.now.strftime('%H:%M:%S.%2N')}: Changing baudrate to 57600...#{IceTM::RESET}"
+						else
+							puts "#{IceTM::BOLD}#{IceTM::RED}:: #{Time.now.strftime('%H:%M:%S.%2N')}: Cannot change the baudrate#{IceTM::RESET}"
+						end
+
 					else
 						"#{BOLD}#{RED}:: #{Time.now.strftime('%H:%M:%S.%2N')}: No permission granted to change Baudrate#{RESET}"
 					end
@@ -73,14 +79,12 @@ module IceTM
 		cpu_u = mem_u = swap_u = iostat = net_upload = net_download = 0
 
 		Thread.new {
-			while true
-				cpu_u = LS::CPU.total_usage(0.125).to_f
-			end
+			cpu_u = LS::CPU.total_usage(0.25).to_f while true
 		}
 
 		Thread.new {
 			while true
-				netstat = LS::Net::current_usage(0.1)
+				netstat = LS::Net::current_usage(0.25)
 				net_upload = netstat[:transmitted].to_i
 				net_download = netstat[:received].to_i
 			end
@@ -101,8 +105,11 @@ module IceTM
 						break
 					end
 				rescue EOFError
+					sleep 0.05
 					retry
 				end
+
+				sleep 0.05
 			end
 
 			puts "#{IceTM::BOLD}#{IceTM::GREEN}:: #{Time.now.strftime('%H:%M:%S.%2N')}: Device ready!#{IceTM::RESET}"
@@ -130,12 +137,21 @@ module IceTM
 				disk_used_percent = convert_percent(diskstat[:used].*(100).fdiv(diskstat[:total]))
 				disk_avail_percent = convert_percent(_diskavail.*(100).fdiv(diskstat[:total]))
 
-				total_process = LS::Process.count
-				ps_r = LS::Process.running.count
-				ps_sl = LS::Process.sleeping.count
-				ps_i = LS::Process.idle.count
-				ps_t = LS::Process.stopped.count
-				ps_z = LS::Process.zombie.count
+				total_process = ps_r = ps_sl = ps_i = ps_t = ps_z = 0
+
+				# Get process count
+				process_types = LS::Process.types
+
+				total_process = 0
+				process_types.values.each { |x|
+					ps_r += 1 if x == :running
+					ps_sl += 1 if x == :sleeping
+					ps_i += 1 if x == :idle
+					ps_t += 1 if x == :stopped
+					ps_z += 1 if x == :zombie
+
+					total_process += 1
+				}
 
 				# Output has to be exactly this long. If not, ice-taskmanager shows invalid result.
 				# No string is split inside ice-task manager, it just depends on the string length.
@@ -172,7 +188,7 @@ module IceTM
 				file.syswrite('~')
 				STDOUT.flush
 
-				sleep 0.1
+				sleep 0.25
 			end
 		rescue Interrupt, SystemExit, SignalException
 			file &.close
