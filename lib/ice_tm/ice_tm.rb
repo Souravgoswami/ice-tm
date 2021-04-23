@@ -197,7 +197,7 @@ module IceTM
 			device = find_device
 
 			unless device
-				puts "#{IceTM::BOLD}#{IceTM::RED}:: #{Time.now.strftime('%H:%M:%S.%2N')}: No device found. Retrying#{IceTM::RESET}"
+				puts "#{IceTM::BOLD}#{IceTM::RED}:: #{Time.now.strftime('%H:%M:%S.%2N')}: Error establishing connection. Don't worry if this is a valid device. Retrying...#{IceTM::RESET}"
 				sleep 0.1
 			end
 
