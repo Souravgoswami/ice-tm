@@ -6,9 +6,9 @@ Ice task manager allows you to monitor your system resources using Arduino conne
 Sorry, if you like this repo. But pagination is not a good choice.
 This repo was created, and I don't feel like deleting it, but this is archived in favour of:
 
-![https://github.com/Souravgoswami/blink-taskmanager](Blink-TaskManager)
+[blink-taskmanager (Arduino)](https://www.github.com/Souravgoswami/blink-taskmanager)
 
-![https://github.com/Souravgoswami/blink-tm](Blink-TM (Rubygem))
+[Blink-TM (Rubygem)](https://www.github.com/Souravgoswami/blink-tm)
 
 ## Installation
 Ice-taskmanager should be installed on your Arduino.
